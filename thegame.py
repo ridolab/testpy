@@ -10,7 +10,7 @@ term = blessed.Terminal()
 location_x = int(term.width/2) - 20
 location_y = int(term.height/2) - 20
 
-options = ["P", "C", "F", "X"]
+options = ["P", "C", "F", "Q"]
 
 message = {
   "tie": term.move_x(location_x) + "Pari, se rifá!",
@@ -26,7 +26,7 @@ instructions = [
   "",
   "Premi C per Carta... F per Forbeson... P per Piera...",
   "",
-  "Premi X per uscire",
+  "Premi Q per uscire",
   "",
   "- - - - - - - - - - -"
 ]
@@ -52,6 +52,8 @@ def decide_winner(user_choice, computer_choice):
     else:
       print (message["lost"])
       counter["Computer"] += 1
+  elif ( not user_choice ):
+    print(term.move_x(location_x) + "Dai, Struca un boton!")
   else:
     print(term.move_x(location_x) + "Te ghe sbagliá scelta, riprova!")
 
@@ -74,7 +76,7 @@ def play_RPS():
     print(term.move_x(location_x) + "Ti sa dito: Carta, Forbeson, Piera: ")
     user_choice = ''
     with term.cbreak():
-      user_choice = term.inkey(timeout=3)
+      user_choice = term.inkey(timeout=30)
       user_choice = user_choice.upper()
       if user_choice == options[3]:
         play = False
